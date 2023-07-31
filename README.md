@@ -12,7 +12,7 @@ This application is designed to assist college students in navigating through an
 
 1. Clone the repository:
 ```
- git clone https://github.com/Soumya-Vaidya/ZigZag.git
+ git clone https://github.com/Gargi-Vedpathak/ZigZag.git
 ```
 
 2. Navigate into the project directory
@@ -32,7 +32,7 @@ This will start the Flask development server. You can access the application by 
 
 1. 
 ```
-docker build -t zigzag https://github.com/Soumya-Vaidya/ZigZag.git
+docker build -t zigzag https://github.com/Gargi-Vedpathak/ZigZag.git
 ```
 
 2.
@@ -61,4 +61,4 @@ Database: SQLite
 
 ## Credits
 
-This project was made by Soumya Vaidya
+This project was made by Gargi Vedpathak, Soumya Vaidya, Anushka Bhatnagar and Sakshi Dhomane.
