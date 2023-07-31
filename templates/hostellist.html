@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylelist.css')}}">
+    <title> Hostels </title>
+</head>
+
+<body>
+    <!-- header section starts  -->
+
+    <header>
+
+        <a href="#" class="logo">
+            <img src="static/images/zigzaglogo.png" alt="">
+        </a>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <form action="/" method="POST" id="search" class="box">
+            <input type="text" name="name" placeholder="Explore" />
+            <input type="submit" value="Go!">
+        </form>
+        <nav class="navbar">
+            <a href="/">Home</a>
+            <a href="/">Explore</a>
+            <a href="/">Reviews</a>
+            <a href='/feedback'>Feedback</a>
+            <a>Account</a>
+        </nav>
+
+    </header>
+
+    <!-- header section ends -->
+    <div id="main">
+        {% if hostels|length == 0 %}
+        <h1>No Hostels found. Try Later!</h1>
+        {% else %}
+        <div class="container">
+
+            <h1 class="heading">Hostels</h1>
+
+            <div class="box-container">
+                {% for hostel in hostels %}
+                <div class="box">
+                    <div class="image">
+                        <img src="{{ url_for('static', filename='images/' + hostel['himg']) }}" alt="">
+
+                    </div>
+                    <div class="content">
+                        <h3>{{ hostel['hname']}}</h3>
+                        <p> {{ hostel['hdesc'] }}</p>
+                        <a href="#" class="btn">Read More</a>
+                        <div class="icons">
+                            <span>Rs. {{ hostel['hprice']}} </span>
+                            <span> Location: {{ hostel['hlocation']}} </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="load-more"> Load More </div>
+        </div>
+        <script>
+
+            let loadMoreBtn = document.querySelector('#load-more');
+            let currentItem = 3;
+
+            loadMoreBtn.onclick = () => {
+                let boxes = [...document.querySelectorAll('.container .box-container .box')];
+                for (var i = currentItem; i < currentItem + 3; i++) {
+                    boxes[i].style.display = 'inline-block';
+                }
+                currentItem += 3;
+
+                if (currentItem >= boxes.length) {
+                    loadMoreBtn.style.display = 'none';
+                }
+            }
+
+        </script>
+    </div>
+    {% endif %}
+    <!-- footer section  -->
+
+    <section class="footer">
+
+        <div class="share">
+            <a href="#" class="btn">Facebook</a>
+            <a href="#" class="btn">Twitter</a>
+            <a href="#" class="btn">Instagram</a>
+            <a href="#" class="btn">Pinterest</a>
+            <a href="#" class="btn">Linkedin</a>
+        </div>
+
+        <h1 class="credit"> Project for <span> DBMS </span> | All Rights Reserved! </h1>
+
+    </section>
+
+    <!-- scroll top button  -->
+    <!-- <a href="#home" class="fas fa-angle-up" id="scroll-top"></a> -->
+
+    <!-- loader  -->
+    <div class="loader-container">
+        <img src="static/images/ZigZagfinall.gif" alt="">
+    </div>
+
+    <!-- custom js file link  -->
+    <!-- <script src="script.js"></script> -->
+    <script>
+        let menu = document.querySelector('#menu-bar');
+        let navbar = document.querySelector('.navbar');
+
+        menu.onclick = () => {
+
+            menu.classList.toggle('fa-times');
+            navbar.classList.toggle('active');
+
+        }
+
+        window.onscroll = () => {
+
+            menu.classList.remove('fa-times');
+            navbar.classList.remove('active');
+
+            if (window.scrollY > 60) {
+                document.querySelector('#scroll-top').classList.add('active');
+            } else {
+                document.querySelector('#scroll-top').classList.remove('active');
+            }
+
+        }
+
+        function loader() {
+            document.querySelector('.loader-container').classList.add('fade-out');
+        }
+
+        function fadeOut() {
+            setInterval(loader, 3000);
+        }
+
+        window.onload = fadeOut();
+    </script>
+</body>
+
+</html>
